@@ -2,15 +2,15 @@ $(document).ready(function(){
 
 
 
-$('#patientForm').submit(function (e){
+$('form').submit(function (e){
 
-    var x = $("#patientForm").serializeArray();
+   console.log($("form").serializeArray());
     e.preventDefault();
 
 
-    $.each(x, function(i, field){
-        $("#results").append(field.name + ":" + field.value + " ");
-    });
+     $.each(x, function(i, field){
+         $("#results").append(field.name + ":" + field.value + " ");
+     });
 });
 
 //form
