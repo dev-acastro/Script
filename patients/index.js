@@ -23,7 +23,7 @@ $("form").submit(function (e){
 
      var jsonData = JSON.stringify(data);
 
-     console.log(jsonData);
+
 
      postPatient(jsonData);
 
@@ -48,7 +48,6 @@ function postPatient(data) {
         },
         success: function (response) {
 
-
             var access_token = response.access_token ;
             $.ajax({
                 method: 'POST',
@@ -56,28 +55,21 @@ function postPatient(data) {
                 headers: {
                     "Organization-ID": "5e7b7774c9e1470c0d716320",
                     "Authorization": "Bearer BMui7AvkRGC9OZQ8joJG2G8CaSTI",
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin:" : "*"
+                    // "Accept": "application/json",
+                    // "Content-Type": "application/json",
+                    //"Access-Control-Allow-Origin" : "*",
+                   "Access-Control-Allow-Headers": "x-requested-with"
                 },
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
-                data: JSON.stringify({
-                    "firstName": "Arturo",
-                    "lastName": "Castro",
-                    "dateOfBirth": "03/12/1991",
-                    "address1": "Av. Jerusalem 4152 ",
-                    "city": "SS",
-                    "state": "CA",
-                    "postalCode": "0000"
-                }),
+                // crossDomain: true,
+                // xhrFields: {
+                //     withCredentials: true
+                // },
+                data: data,
                 success: function (response) {
                     console.log(response)
                 },
-                error: function (error){
-                    console.log(error);
+                error: function (e){
+                    //console.log(e);
                 }
 
             });
