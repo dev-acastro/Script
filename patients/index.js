@@ -48,18 +48,13 @@ function postPatient(data, token) {
             $.ajax({
                 method: 'POST',
                 url: "https://prod.hs1api.com/ascend-gateway/api/v1/patients",
-                // headers: {
-                //     "Organization-ID": "5e7b7774c9e1470c0d716320",
-                //     "Authorization": "Bearer "+token,
-                // },
-
                 beforeSend: function (request) {
                     request.setRequestHeader("Organization-ID", "5e7b7774c9e1470c0d716320")
-                    request.setRequestHeader("Authorization", "Bearer "+token)
-                    request.setRequestHeader('Access-Control-Allow-Origin', "*")
+                    request.setRequestHeader("Authorization", "Bearer 4BGRmW08WGkHeaRfg1uiNQybsPWw")
+                    //request.setRequestHeader('Access-Control-Allow-Origin', "*")
                 },
-
                 data: data,
+                dataType: 'jsonp',
                 success: function (response) {
                     console.log(response)
                 },
