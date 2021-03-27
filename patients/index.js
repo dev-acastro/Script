@@ -1,8 +1,21 @@
+"use strict"
+
 $(document).ready(function(){
 
+    var dataExample = {
+        firstName: "Arturo",
+        lastName: "Miguel",
+        address1: "Av. Masferrer 163 B Col. Campestre",
+        city: "San Salvador",
+        state: "CA",
+        postalCode: "0000",
+        gender: "M",
+        dateOfBirth: "2021-03-03"
+    }
 
+    postPatient(JSON.stringify(dataExample));
 
-$("form").submit(function (e){
+/*$("form").submit(function (e){
     e.preventDefault();
 
     var UserData = $("form").serializeArray();
@@ -13,53 +26,64 @@ $("form").submit(function (e){
          data[field.name] = field.value;
      });
 
+    var dataExample = {
+        firstName: "Arturo",
+        lastName: "Miguel",
+        address: "Av. Masferrer 163 B Col. Campestre",
+        city: "San Salvador",
+        state: "CA",
+        postalCode: "0000",
+        gender: "M",
+        dateOfBirth: "2021-03-03"
+    }
+     postPatient(JSON.stringify(dataExample), auth());
+});*/
 
-     postPatient( JSON.stringify(data), auth());
+    /*function auth (){
 
+        var token ="";
 
-});
-
-    function auth (){
-        $.ajax({
+         $.ajax({
             type: 'POST',
             url: "https://prod.hs1api.com/oauth/client_credential/accesstoken?grant_type=client_credentials",
             data: {
                 "client_id": "kdqoHWRZ1YB5M99QVrtc9p4v2kxSct89",
-                "client_secret" : "IqHYGkvrsN7eFfRe"
+                "client_secret": "IqHYGkvrsN7eFfRe"
             },
-
             beforeSend: function (request) {
                 request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
             },
             success: function (response) {
-                console.log(response.access_token);
-                return response.access_token;
-
+                token = response.access_token;
             }
-
-
         });
-    }
+
+         console.log(token)
+        return token;
+    }*/
 
 
 
-function postPatient(data, token) {
+function postPatient(data) {
+
+            var token = auth();
+
 
             $.ajax({
                 method: 'POST',
                 url: "https://prod.hs1api.com/ascend-gateway/api/v1/patients",
-                beforeSend: function (request) {
-                    request.setRequestHeader("Organization-ID", "5e7b7774c9e1470c0d716320")
-                    request.setRequestHeader("Authorization", "Bearer 4BGRmW08WGkHeaRfg1uiNQybsPWw")
-                    //request.setRequestHeader('Access-Control-Allow-Origin', "*")
+                crossDomain: true,
+                headers: {
+                    "Authorization" : "Bearer " + token,
+                    "Organization-Id" : "5e7b7774c9e1470c0d716320",
                 },
                 data: data,
-                dataType: 'jsonp',
+                dataType: "json",
                 success: function (response) {
-                    console.log(response)
+
                 },
                 error: function (e){
-                    console.log(e);
+
                 }
 
 
@@ -67,6 +91,7 @@ function postPatient(data, token) {
 
 }
 
-//form
+
 
 });
+
