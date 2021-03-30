@@ -2,10 +2,31 @@
 
 $(document).ready(function(){
 
-    auth();
 
 
-    function getDataForm(e){
+
+    var auth = function auth (){
+
+        var token = "";
+
+        return $.ajax({
+            type: 'GET',
+            url: "http://icjmedia.org/api/",
+            success: function (response) {
+                var jsondata = JSON.parse(response).access_token
+                token = jsondata;
+
+            },
+            async: false
+        });
+
+        return token;
+    }();
+
+    console.log(auth.responseText )
+
+
+    /*function getDataForm(e){
         e.preventDefault();
 
         var userData = $(this).serializeArray();
@@ -16,31 +37,20 @@ $(document).ready(function(){
             data[field.name] = field.value;
         });
 
-        console.log(userData);
-    }
+        console.log(data)
 
-    function auth (){
-
-      //  var token ="";
-
-         $.ajax({
-            type: 'GET',
-            url: "http://icjmedia.org/api/",
-            success: function (response) {
-                console.log(response)
-            }
-        });
+        return data;
+    }*/
 
 
-    }
 
-function getPatients(){
+/*function getPatients(token){
     $.ajax({
         method: 'GET',
         url: "https://prod.hs1api.com/ascend-gateway/api/v1/patients",
         crossDomain: true,
         headers: {
-            "Authorization" : "Bearer EInjlHiva9gYTmmcPU34vaC3f6YF" ,
+            "Authorization" : "Bearer "+token ,
             "Organization-Id" : "5e7b7774c9e1470c0d716320",
         },        
         dataType: "json",
@@ -80,7 +90,7 @@ function postPatient(data) {
 
             });
 
-}
+}*/
 
 
 
