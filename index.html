@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                dateClick: () => { alert("cliek")},
+                initialView: 'timeGridWeek',
+                droppable: true,
+                eventChange : (e)=>{console.log(e.event)},
+
+                events: [
+                    { // this object will be "parsed" into an Event Object
+                        id: 12345,
+                        editable: true,
+                        title: 'Titulo', // a property!
+                        start: '2021-05-03T12:30:00', // a property!
+                        end: '2021-05-03T14:30:00' // a property! ** see important note below about 'end' **
+                    },
+                    { // this object will be "parsed" into an Event Object
+                        id: 12345,
+                        editable: true,
+                        title: 'Titulo', // a property!
+                        start: '2021-05-04', // a property!
+                        end: '2021-05-05' // a property! ** see important note below about 'end' **
+                    },
+                    { // this object will be "parsed" into an Event Object
+                        id: 12345,
+                        editable: true,
+                        title: 'Titulo', // a property!
+                        start: '2021-05-05', // a property!
+                        end: '2021-05-06' // a property! ** see important note below about 'end' **
+                    }
+                ]
+            });
+            calendar.render();
+        });
+
+    </script>
+</head>
+<body>
+<div style="padding: 20px 100px">
+
+<div id='calendar'></div>
+
+</div>
+</body>
+</html>

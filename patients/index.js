@@ -26,7 +26,7 @@ $(document).ready(function(){
     console.log(auth.responseText )
 
 
-    /*function getDataForm(e){
+    function getDataForm(e){
         e.preventDefault();
 
         var userData = $(this).serializeArray();
@@ -40,21 +40,22 @@ $(document).ready(function(){
         console.log(data)
 
         return data;
-    }*/
+    }
 
 
 
-/*function getPatients(token){
+function getPatients(){
     $.ajax({
         method: 'GET',
         url: "https://prod.hs1api.com/ascend-gateway/api/v1/patients",
         crossDomain: true,
         headers: {
-            "Authorization" : "Bearer "+token ,
+            "Authorization" : "Bearer YELV7i9g6LRmEftKGG6rvoctGtZ8" ,
             "Organization-Id" : "5e7b7774c9e1470c0d716320",
         },        
         dataType: "json",
         success: function (response) {
+            console.log(response)
 
         },
         error: function (e){
@@ -65,7 +66,9 @@ $(document).ready(function(){
     });
 }
 
+getPatients();
 
+/*
 
 function postPatient(data) {
 
