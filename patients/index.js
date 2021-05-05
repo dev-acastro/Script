@@ -1,4 +1,5 @@
 
+import Authorization from "../Authorization";
 
 $(document).ready(function(){
 
