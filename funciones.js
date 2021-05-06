@@ -33,6 +33,12 @@ $(document).ready(function(){
 })
 
 
+
+function ajaxCall(endpoint, method, id="", data=""){
+
+}
+
+
 /*
 *
 * Funciones de Citas
@@ -50,6 +56,87 @@ function callback (response){
 
 
 function getAllAppointments(){
+
+    $.ajax({
+        method: 'GET',
+        url: "https://prod.hs1api.com/ascend-gateway/api/v1/appointments",
+        crossDomain: true,
+        headers: {
+            "Authorization" : "Bearer " +token,
+            "Organization-Id" : "5e7b7774c9e1470c0d716320",
+        },
+        dataType: "json",
+        success: function (response) {
+            callback(response)
+
+        },
+        error: function (e){
+            console.log(e)
+
+        }
+
+
+    });
+
+
+
+}
+
+function getAppointment(id){
+
+    $.ajax({
+        method: 'GET',
+        url: "https://prod.hs1api.com/ascend-gateway/api/v1/appointments",
+        crossDomain: true,
+        headers: {
+            "Authorization" : "Bearer " +token,
+            "Organization-Id" : "5e7b7774c9e1470c0d716320",
+        },
+        dataType: "json",
+        success: function (response) {
+            callback(response)
+
+        },
+        error: function (e){
+            console.log(e)
+
+        }
+
+
+    });
+
+
+
+}
+
+function saveAppointment(data){
+
+    $.ajax({
+        method: 'GET',
+        url: "https://prod.hs1api.com/ascend-gateway/api/v1/appointments",
+        crossDomain: true,
+        headers: {
+            "Authorization" : "Bearer " +token,
+            "Organization-Id" : "5e7b7774c9e1470c0d716320",
+        },
+        dataType: "json",
+        success: function (response) {
+            callback(response)
+
+        },
+        error: function (e){
+            console.log(e)
+
+        }
+
+
+    });
+
+
+
+}
+
+function updateAppointment(id, data){
 
     $.ajax({
         method: 'GET',
