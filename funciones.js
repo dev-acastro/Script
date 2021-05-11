@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 * Autorizacion
 * */
@@ -41,10 +43,7 @@ $.when(
 // Get Appointment
 
     function callback (response){
-
-        console.log(response)
         return response;
-
     }
 
 
@@ -102,7 +101,7 @@ $.when(
 
     }
 
-    ((start = "2021-01-01")=>{
+    ((start = "2021-05-01")=>{
 
         $.ajax({
             method: 'GET',
@@ -114,8 +113,8 @@ $.when(
             },
             dataType: "json",
             success: function (response) {
-                callback(response)
-                makeCalendar();
+                callback(response);
+                makeCalendar(response.data);
 
             },
             error: function (e){
@@ -130,36 +129,23 @@ $.when(
 
     })();
 
-    function makeCalendar(){
+    function makeCalendar(data){
+
+       data.forEach(function (item, index){
+            item.editable = true
+        })
+
+
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            dateClick: () => { alert("cliek")},
             initialView: 'timeGridWeek',
             droppable: true,
-            eventChange : onFunction(),
-            events: [
-                { // this object will be "parsed" into an Event Object
-                    id: 12345,
-                    editable: true,
-                    title: 'Titulo', // a property!
-                    start: '2021-05-03T12:30:00', // a property!
-                    end: '2021-05-03T14:30:00' // a property! ** see important note below about 'end' **
-                },
-                { // this object will be "parsed" into an Event Object
-                    id: 12345,
-                    editable: true,
-                    title: 'Titulo', // a property!
-                    start: '2021-05-04', // a property!
-                    end: '2021-05-05' // a property! ** see important note below about 'end' **
-                },
-                { // this object will be "parsed" into an Event Object
-                    id: 12345,
-                    editable: true,
-                    title: 'Titulo', // a property!
-                    start: '2021-05-05', // a property!
-                    end: '2021-05-06' // a property! ** see important note below about 'end' **
-                }
-            ]
+            height: 700,
+            slotMinTime: "08:00:00",
+            slotMaxTime: "18:00:00",
+            eventResize: eventResize,
+            eventDrop: eventDrop,
+            events: data,
         });
         calendar.render();
     }
@@ -220,8 +206,23 @@ $.when(
     }
 
 
-    function onFunction(){
-        alert("Hola");
+    function eventResize(object){
+
+
+
+        var data = JSON.parse(object.event.extendedProps)
+        console.log(typeof (data))
+
+
+
+
+
+    }
+
+    function eventDrop(object){
+        var data = object.event.extendedProps
+        data.created = "false"
+
     }
 
 });
